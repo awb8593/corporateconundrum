@@ -827,6 +827,7 @@ MonoBehaviour:
   pointer: {fileID: 1622084409}
   target: {fileID: 327111943}
   targetSize: 1
+  sliderSpeed: 1
 --- !u!1 &1622084407
 GameObject:
   m_ObjectHideFlags: 0

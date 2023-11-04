@@ -21,20 +21,24 @@ public class MeterManager : MonoBehaviour
 
     private void Update()
     {
-        pointer.value += Time.deltaTime * sliderSpeed;
-
-        // player has attempted to hit the target
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (sliding = true)
         {
-            StopSliderMotion();
-            CheckSuccess();
-        }
+            pointer.value += Time.deltaTime * sliderSpeed;
 
-        // reverse direction
-        if (pointer.value >= 1 || pointer.value <= 0)
-        {
-            sliderSpeed = -sliderSpeed;
+            // player has attempted to hit the target
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                StopSliderMotion();
+                CheckSuccess();
+            }
+
+            // reverse direction
+            if (pointer.value >= 1 || pointer.value <= 0)
+            {
+                sliderSpeed = -sliderSpeed;
+            }
         }
+        
     }
 
     void UpdateMeter(float newSize)
@@ -53,11 +57,13 @@ public class MeterManager : MonoBehaviour
         targetSize -= 0.1f;
         targetSize = Mathf.Max(0, targetSize);
         UpdateMeter(targetSize);
+        pointer.value = 0;
     }
 
     private void StartSliderMotion()
     {
         sliding = true;
+        pointer.value = 0;
     }
 
     private void StopSliderMotion()
