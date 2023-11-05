@@ -37,6 +37,7 @@ public class Monitor : MonoBehaviour
             }
         }
         if (PopUps.Count < 1) {
+            SavePlayerData();
             SceneManager.LoadScene(6);
         }
     }
@@ -49,6 +50,22 @@ public class Monitor : MonoBehaviour
 
         return newPlayer;
     }
+
+    void SavePlayerData()
+    {
+        for (int i = 0; i < players.Count; i++)
+        {
+            // Save each player's score using PlayerPrefs
+            PlayerPrefs.SetInt("PlayerScore" + i, players[i].Score);
+        }
+
+        // Save the count of players
+        PlayerPrefs.SetInt("PlayerCount", players.Count);
+
+        // Call PlayerPrefs.Save() to save the data
+        PlayerPrefs.Save();
+    }
+
 
     void UpdateScoreText()
     {
