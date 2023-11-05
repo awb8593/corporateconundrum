@@ -1,16 +1,21 @@
 using UnityEngine;
 using System.Collections.Generic;
+using TMPro;
 
 public class Monitor : MonoBehaviour
 {
     public Queue<PopUp> PopUps = new Queue<PopUp>();
-    public Player[] players;
+     public List<Player> players = new List<Player>();
     public GameObject[] popUpPrefabs; // Define an array of prefab objects
+    public TextMeshProUGUI scoreText;
 
     // Constructor
     void Start()
     {
-        int numPopups = 10; // Replace with your desired number of popups
+        Player p1 = createPlayer(0);
+        players.Add(p1);
+
+        int numPopups = 30; // Replace with your desired number of popups
         for (int i = 0; i < numPopups; i++)
         {
             PopUp popup = InstantiateRandomPopUpPrefab();
@@ -26,7 +31,27 @@ public class Monitor : MonoBehaviour
             {
                 PopUp currentPopup = PopUps.Dequeue();
                 currentPopup.DestroyPopUp();
+                players[0].ChangeScore(1);
+                UpdateScoreText();
             }
+        }
+    }
+
+    Player createPlayer(int initialScore)
+    {
+        Player newPlayer = new Player();
+        newPlayer.Score = initialScore;
+        newPlayer.monitor = this; // Set the monitor reference
+
+        return newPlayer;
+    }
+
+    void UpdateScoreText()
+    {
+        // Update the TMP score text with the current score of p1
+        if (scoreText != null && players.Count > 0)
+        {
+            scoreText.text = "P1: " + players[0].Score.ToString();
         }
     }
 
