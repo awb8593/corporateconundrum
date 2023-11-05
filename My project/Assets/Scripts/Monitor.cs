@@ -10,6 +10,7 @@ public class Monitor : MonoBehaviour
      public List<Player> players = new List<Player>();
     public GameObject[] popUpPrefabs; // Define an array of prefab objects
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI adCaption;
     public AudioSource audioSource;
     public AudioSource countdownAudio;
     private bool isRemovingAd = false;
@@ -20,6 +21,8 @@ public class Monitor : MonoBehaviour
     {
         Player p1 = createPlayer(0);
         players.Add(p1);
+
+        adCaption.gameObject.SetActive(false);
 
         int numPopups = 30; // Replace with your desired number of popups
         for (int i = 0; i < numPopups; i++)
@@ -55,6 +58,7 @@ public class Monitor : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 isRemovingAd = false;
+                adCaption.gameObject.SetActive(false);
                 if (countdownAudio != null && countdownAudio.isPlaying)
                 {
                     countdownAudio.Stop();
@@ -83,6 +87,7 @@ public class Monitor : MonoBehaviour
 
     private void removeAd()
     {
+        adCaption.gameObject.SetActive(true);
         // play audio queue, wait 6 seconds, call DequeueLast(PopUps), and call DestroyPopUp 
         if (!isRemovingAd)
         {
@@ -107,6 +112,8 @@ public class Monitor : MonoBehaviour
             }
             yield return null; // Wait for the next frame
         }
+
+        adCaption.gameObject.SetActive(false);
 
         if (PopUps.Count > 0)
         {
