@@ -11,6 +11,7 @@ public class Monitor : MonoBehaviour
     public GameObject[] popUpPrefabs; // Define an array of prefab objects
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI adCaption;
+    public GameObject adCaptionBox;
     public AudioSource audioSource;
     public AudioSource countdownAudio;
     private bool isRemovingAd = false;
@@ -23,6 +24,7 @@ public class Monitor : MonoBehaviour
         players.Add(p1);
 
         adCaption.gameObject.SetActive(false);
+        adCaptionBox.gameObject.SetActive(false);
 
         int numPopups = 30; // Replace with your desired number of popups
         for (int i = 0; i < numPopups; i++)
@@ -59,6 +61,7 @@ public class Monitor : MonoBehaviour
             {
                 isRemovingAd = false;
                 adCaption.gameObject.SetActive(false);
+                adCaptionBox.gameObject.SetActive(false);
                 if (countdownAudio != null && countdownAudio.isPlaying)
                 {
                     countdownAudio.Stop();
@@ -88,6 +91,7 @@ public class Monitor : MonoBehaviour
     private void removeAd()
     {
         adCaption.gameObject.SetActive(true);
+        adCaptionBox.gameObject.SetActive(true);
         // play audio queue, wait 6 seconds, call DequeueLast(PopUps), and call DestroyPopUp 
         if (!isRemovingAd)
         {
@@ -114,6 +118,7 @@ public class Monitor : MonoBehaviour
         }
 
         adCaption.gameObject.SetActive(false);
+        adCaptionBox.gameObject.SetActive(false);
 
         if (PopUps.Count > 0)
         {
@@ -152,7 +157,7 @@ public class Monitor : MonoBehaviour
     void EnlargePopUp(PopUp popup)
     {
         // Adjust the scale of the PopUp to make it larger
-        float scaleFactor = 1.5f;
+        float scaleFactor = 0.8f;
         popup.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
         popup.enlarged = true;
         if (audioSource != null && popup.type != "ad") {
@@ -204,8 +209,8 @@ public class Monitor : MonoBehaviour
 
         if (mainCamera != null)
         {
-            float xViewport = Random.Range(0f, 1f); // Random x position in viewport space (0 to 1)
-            float yViewport = Random.Range(0f, 1f); // Random y position in viewport space (0 to 1)
+            float xViewport = Random.Range(0.4f, 0.6f); // Random x position in viewport space
+            float yViewport = Random.Range(0.4f, 0.6f); // Random y position in viewport space
 
             Vector3 spawnPosition = new Vector3(xViewport, yViewport, mainCamera.nearClipPlane);
             Vector3 worldPosition = mainCamera.ViewportToWorldPoint(spawnPosition);
