@@ -18,6 +18,18 @@ public class Monitor : MonoBehaviour
         }
     }
 
+    private void Update() {
+         if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // Call DestroyPopUp for the top pop-up if there are pop-ups in the queue
+            if (PopUps.Count > 0)
+            {
+                PopUp currentPopup = PopUps.Dequeue();
+                currentPopup.DestroyPopUp();
+            }
+        }
+    }
+
     // Instantiate a random popup prefab
     PopUp InstantiateRandomPopUpPrefab()
     {
@@ -35,7 +47,6 @@ public class Monitor : MonoBehaviour
             Vector3 worldPosition = mainCamera.ViewportToWorldPoint(spawnPosition);
 
             PopUp result = Instantiate(popupPrefab, worldPosition, Quaternion.identity).GetComponent<PopUp>();
-            Debug.Log(result);
             return result;
         }
         else
