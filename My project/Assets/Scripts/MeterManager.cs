@@ -21,7 +21,7 @@ public class MeterManager : MonoBehaviour
 
     private void Update()
     {
-        if (sliding = true)
+        if (sliding == true)
         {
             pointer.value += Time.deltaTime * sliderSpeed;
 
@@ -39,6 +39,7 @@ public class MeterManager : MonoBehaviour
             }
         }
         
+
     }
 
     void UpdateMeter(float newSize)
@@ -80,7 +81,8 @@ public class MeterManager : MonoBehaviour
         if (sliderValue >= targetZoneStart && sliderValue <= targetZoneEnd)
         {
             OnSuccess(); // The player succeeded
-        } else
+        } 
+        else
         {
             Debug.Log("FAIL");
         }
