@@ -6,16 +6,15 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Text;
 using UnityEngine.Events;
-using TMPro;
 
-public class GameManagerScript : MonoBehaviour
+public class GameManager2 : MonoBehaviour
 {
-    public TextMeshProUGUI buttonText;
+    public Text buttonText;
     SpVoice voice = new SpVoice();
     // Start is called before the first frame update
     void Start()
     {
-       
+
     }
 
     // Update is called once per frame
@@ -46,7 +45,7 @@ public class GameManagerScript : MonoBehaviour
 
         if (!string.IsNullOrEmpty(textToSpeak))
         {
-            voice.Rate = -1;
+            voice.Rate = -2;
             voice.Speak(textToSpeak, SpeechVoiceSpeakFlags.SVSFlagsAsync | SpeechVoiceSpeakFlags.SVSFPurgeBeforeSpeak);
         }
     }
