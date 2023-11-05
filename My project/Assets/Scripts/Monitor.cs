@@ -26,10 +26,12 @@ public class Monitor : MonoBehaviour
 
     private void Update()
     {
-        // Enlarge the PopUp at the top of the queue
         if (PopUps.Count > 0)
         {
-            PopUp currentPopup = PopUps.Peek(); // Peek to get the top PopUp without removing it from the queue
+            PopUp[] popUpArray = PopUps.ToArray(); // Convert the Queue to an array
+            int lastIndex = popUpArray.Length - 1;
+            PopUp currentPopup = popUpArray[lastIndex]; // Access the last element in the array
+
             if (currentPopup.type == "banzai" && !currentPopup.enlarged)
             {
                 EnlargePopUp(currentPopup);
@@ -38,11 +40,11 @@ public class Monitor : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                // Call DestroyPopUp for the top pop-up if space is pressed
+                // Call DestroyPopUp for the last pop-up if space is pressed
                 if (PopUps.Count > 0)
                 {
-                    currentPopup = PopUps.Dequeue();
-                    currentPopup.DestroyPopUp();
+                    PopUp lastPopup = DequeueLast(PopUps);
+                    lastPopup.DestroyPopUp();
                     players[0].ChangeScore(1);
                 }
             }
@@ -54,6 +56,30 @@ public class Monitor : MonoBehaviour
             SceneManager.LoadScene(6);
         }
     }
+
+    // Dequeue the last element from the Queue
+    private PopUp DequeueLast(Queue<PopUp> queue)
+    {
+        PopUp lastItem = default(PopUp);
+
+        if (queue.Count > 0)
+        {
+            PopUp[] popUpArray = queue.ToArray();
+            lastItem = popUpArray[popUpArray.Length - 1];
+            queue.Clear(); // Clear the queue
+            foreach (var item in popUpArray)
+            {
+                if (!item.Equals(lastItem))
+                {
+                    queue.Enqueue(item); // Enqueue all elements except the last one
+                }
+            }
+        }
+
+        return lastItem;
+    }
+
+
     void EnlargePopUp(PopUp popup)
     {
         // Adjust the scale of the PopUp to make it larger
