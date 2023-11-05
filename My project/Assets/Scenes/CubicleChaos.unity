@@ -627,6 +627,7 @@ MonoBehaviour:
   players: []
   popUpPrefabs:
   - {fileID: 8940083302789452542, guid: bd71e7c924893014f82946144800afb4, type: 3}
+  scoreText: {fileID: 1072033778}
 --- !u!4 &2024696291
 Transform:
   m_ObjectHideFlags: 0

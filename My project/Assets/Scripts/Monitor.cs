@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Monitor : MonoBehaviour
 {
@@ -34,6 +35,9 @@ public class Monitor : MonoBehaviour
                 players[0].ChangeScore(1);
                 UpdateScoreText();
             }
+        }
+        if (PopUps.Count < 1) {
+            SceneManager.LoadScene(6);
         }
     }
 
