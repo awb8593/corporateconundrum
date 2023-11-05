@@ -27,6 +27,7 @@ public class Monitor : MonoBehaviour
 
     private void Update()
     {
+        UpdateScoreText();
         if (PopUps.Count > 0)
         {
             PopUp[] popUpArray = PopUps.ToArray(); // Convert the Queue to an array
@@ -46,7 +47,12 @@ public class Monitor : MonoBehaviour
                 {
                     PopUp lastPopup = DequeueLast(PopUps);
                     lastPopup.DestroyPopUp();
-                    players[0].ChangeScore(1);
+                    if(lastPopup.type == "ad") {
+                        players[0].ChangeScore(-3);
+                    } else {
+                        players[0].ChangeScore(1);
+                    }
+                    
                 }
             }
         }
@@ -129,7 +135,7 @@ public class Monitor : MonoBehaviour
     // Instantiate a random popup prefab
     PopUp InstantiateRandomPopUpPrefab()
     {
-        int randNum = Random.Range(0, popUpPrefabs.Length - 1);
+        int randNum = Random.Range(0, popUpPrefabs.Length);
         GameObject popupPrefab = popUpPrefabs[randNum];
 
         Camera mainCamera = Camera.main;

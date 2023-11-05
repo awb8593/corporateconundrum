@@ -10,8 +10,8 @@ public class PopUp : MonoBehaviour
     // Constructor
     void Start()
     {
-        int randNum = Random.Range(0, variations.Length - 1);
-        this.type = variations[randNum];
+        int randNum = Random.Range(0, variations.Length);
+        // this.type = variations[randNum];
         this.location = new Vector2(Random.Range(0, Screen.width), Random.Range(0, Screen.height));
     }
 
