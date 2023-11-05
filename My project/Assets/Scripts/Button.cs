@@ -15,7 +15,12 @@ public class Button : MonoBehaviour
         SceneManager.LoadScene(2);
     }
 
-    public void RestartGame()
+    public void Game1()
+    {
+        SceneManager.LoadScene(8);
+    }
+
+    public void Game2()
     {
         SceneManager.LoadScene(4);
     }
@@ -23,11 +28,6 @@ public class Button : MonoBehaviour
     public void LoadJobBoard()
     {
         SceneManager.LoadScene(3);
-    }
-
-    public void LoadSettings()
-    {
-        SceneManager.LoadScene(5);
     }
 
     public void LoadLeaderboard()

@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 739064107}
   - component: {fileID: 739064106}
   - component: {fileID: 739064105}
-  - component: {fileID: 739064104}
+  - component: {fileID: 739064109}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -143,18 +143,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &739064104
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 739064103}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 465ac28eee6f16848b81d07176ec867b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &739064105
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -237,6 +225,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &739064109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 739064103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b8fc54f6e1aa7b40b328b63aed0802c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1072047746
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,7 +379,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Title
+  m_text: Back Button
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -537,7 +537,7 @@ GameObject:
   - component: {fileID: 2144326318}
   - component: {fileID: 2144326317}
   m_Layer: 5
-  m_Name: LoadTitleScreen
+  m_Name: Back Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -561,7 +561,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 18.374939, y: -40.57869}
+  m_AnchoredPosition: {x: 179, y: -170}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2144326317
@@ -608,9 +608,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 739064104}
-        m_TargetAssemblyTypeName: Button, Assembly-CSharp
-        m_MethodName: Title
+      - m_Target: {fileID: 739064109}
+        m_TargetAssemblyTypeName: BackOut, Assembly-CSharp
+        m_MethodName: ReturnToPreviousScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

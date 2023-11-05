@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndingSequence.unity
     guid: aad0f6bbfac22834ca32eee1fd717ed1
+  - enabled: 1
+    path: Assets/Scenes/CubicleChaos.unity
+    guid: 1600adcb61152844ebdd60eb5b930f77
   m_configObjects: {}
