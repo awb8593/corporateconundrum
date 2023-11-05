@@ -9,8 +9,8 @@ public class Button : MonoBehaviour
     {
         SceneManager.LoadScene(1);
     }
-    
-    public void Start()
+
+    public void HowTo()
     {
         SceneManager.LoadScene(2);
     }
