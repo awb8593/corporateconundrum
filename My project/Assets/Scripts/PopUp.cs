@@ -5,6 +5,7 @@ public class PopUp : MonoBehaviour
     public string[] variations; // Prefab variations
     public string type;
     public Vector2 location;
+    public bool enlarged = false;
 
     // Constructor
     void Start()

@@ -24,22 +24,42 @@ public class Monitor : MonoBehaviour
         }
     }
 
-    private void Update() {
-         if (Input.GetKeyDown(KeyCode.Space))
+    private void Update()
+    {
+        // Enlarge the PopUp at the top of the queue
+        if (PopUps.Count > 0)
         {
-            // Call DestroyPopUp for the top pop-up if there are pop-ups in the queue
-            if (PopUps.Count > 0)
+            PopUp currentPopup = PopUps.Peek(); // Peek to get the top PopUp without removing it from the queue
+            if (currentPopup.type == "banzai" && !currentPopup.enlarged)
             {
-                PopUp currentPopup = PopUps.Dequeue();
-                currentPopup.DestroyPopUp();
-                players[0].ChangeScore(1);
-                UpdateScoreText();
+                EnlargePopUp(currentPopup);
+                currentPopup.enlarged = true;
+            }
+
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                // Call DestroyPopUp for the top pop-up if space is pressed
+                if (PopUps.Count > 0)
+                {
+                    currentPopup = PopUps.Dequeue();
+                    currentPopup.DestroyPopUp();
+                    players[0].ChangeScore(1);
+                }
             }
         }
-        if (PopUps.Count < 1) {
+
+        if (PopUps.Count < 1)
+        {
             SavePlayerData();
             SceneManager.LoadScene(6);
         }
+    }
+    void EnlargePopUp(PopUp popup)
+    {
+        // Adjust the scale of the PopUp to make it larger
+        float scaleFactor = 1.5f;
+        popup.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
+        popup.enlarged = true;
     }
 
     Player createPlayer(int initialScore)
