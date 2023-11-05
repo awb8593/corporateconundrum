@@ -1149,7 +1149,7 @@ MonoBehaviour:
   - {fileID: 8940083302789452542, guid: bd71e7c924893014f82946144800afb4, type: 3}
   - {fileID: 8940083302789452542, guid: e72b38bba0621f34cbf87361f6bd0578, type: 3}
   scoreText: {fileID: 1072033778}
-  adCaption: {fileID: 0}
+  adCaption: {fileID: 1855049440}
   audioSource: {fileID: 477895428}
   countdownAudio: {fileID: 12836031}
 --- !u!4 &2024696291
