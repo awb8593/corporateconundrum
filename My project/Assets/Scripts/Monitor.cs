@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class Monitor : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class Monitor : MonoBehaviour
     public GameObject[] popUpPrefabs; // Define an array of prefab objects
     public TextMeshProUGUI scoreText;
     public AudioSource audioSource;
+    public AudioSource countdownAudio;
+    private bool isRemovingAd = false;
 
     // Constructor
     void Start()
@@ -38,6 +41,14 @@ public class Monitor : MonoBehaviour
             {
                 EnlargePopUp(currentPopup);
                 currentPopup.enlarged = true;
+            } else {
+                if (!currentPopup.enlarged) {
+                    EnlargePopUp(currentPopup);
+                }
+                if (!isRemovingAd)
+                {
+                    removeAd();
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.Space))
@@ -63,6 +74,33 @@ public class Monitor : MonoBehaviour
             SceneManager.LoadScene(6);
         }
     }
+
+    private void removeAd() {
+        // play audio queue, wait 6 seconds, call DequeLast(PopUps), and call DestroyPopUp 
+        if (!isRemovingAd)
+        {
+            isRemovingAd = true;
+            if (countdownAudio != null)
+            {
+                countdownAudio.Play();
+            }
+            StartCoroutine(WaitAndDestroyAd(6.0f)); // Wait for 6 seconds and then destroy the last ad
+        }
+    }
+
+    private IEnumerator WaitAndDestroyAd(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+
+        if (PopUps.Count > 0)
+        {
+            PopUp lastAd = DequeueLast(PopUps);
+            lastAd.DestroyPopUp();
+        }
+
+        isRemovingAd = false;
+    }
+
 
     // Dequeue the last element from the Queue
     private PopUp DequeueLast(Queue<PopUp> queue)
@@ -93,7 +131,7 @@ public class Monitor : MonoBehaviour
         float scaleFactor = 1.5f;
         popup.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
         popup.enlarged = true;
-        if (audioSource != null) {
+        if (audioSource != null && popup.type != "ad") {
             audioSource.Play();
         }
     }
