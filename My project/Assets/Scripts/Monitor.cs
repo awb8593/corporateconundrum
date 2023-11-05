@@ -9,6 +9,7 @@ public class Monitor : MonoBehaviour
      public List<Player> players = new List<Player>();
     public GameObject[] popUpPrefabs; // Define an array of prefab objects
     public TextMeshProUGUI scoreText;
+    public AudioSource audioSource;
 
     // Constructor
     void Start()
@@ -86,6 +87,9 @@ public class Monitor : MonoBehaviour
         float scaleFactor = 1.5f;
         popup.transform.localScale = new Vector3(scaleFactor, scaleFactor, scaleFactor);
         popup.enlarged = true;
+        if (audioSource != null) {
+            audioSource.Play();
+        }
     }
 
     Player createPlayer(int initialScore)

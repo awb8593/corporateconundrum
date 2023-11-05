@@ -102,6 +102,7 @@ MonoBehaviour:
   - ad
   type: 
   location: {x: 0, y: 0}
+  enlarged: 0
 --- !u!1 &8940083302789452542
 GameObject:
   m_ObjectHideFlags: 0
@@ -205,3 +206,4 @@ MonoBehaviour:
   - ad
   type: 
   location: {x: 0, y: 0}
+  enlarged: 0
