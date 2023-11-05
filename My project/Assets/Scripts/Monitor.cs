@@ -45,7 +45,7 @@ public class Monitor : MonoBehaviour
                 if (!currentPopup.enlarged) {
                     EnlargePopUp(currentPopup);
                 }
-                if (!isRemovingAd)
+                if (!isRemovingAd && currentPopup.type == "ad")
                 {
                     removeAd();
                 }
