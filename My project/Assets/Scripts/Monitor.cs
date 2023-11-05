@@ -13,6 +13,7 @@ public class Monitor : MonoBehaviour
     public AudioSource audioSource;
     public AudioSource countdownAudio;
     private bool isRemovingAd = false;
+    private Coroutine adRemovalCoroutine;
 
     // Constructor
     void Start()
@@ -53,6 +54,11 @@ public class Monitor : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space))
             {
+                isRemovingAd = false;
+                if (countdownAudio != null && countdownAudio.isPlaying)
+                {
+                    countdownAudio.Stop();
+                }
                 // Call DestroyPopUp for the last pop-up if space is pressed
                 if (PopUps.Count > 0)
                 {
@@ -75,8 +81,9 @@ public class Monitor : MonoBehaviour
         }
     }
 
-    private void removeAd() {
-        // play audio queue, wait 6 seconds, call DequeLast(PopUps), and call DestroyPopUp 
+    private void removeAd()
+    {
+        // play audio queue, wait 6 seconds, call DequeueLast(PopUps), and call DestroyPopUp 
         if (!isRemovingAd)
         {
             isRemovingAd = true;
@@ -84,13 +91,22 @@ public class Monitor : MonoBehaviour
             {
                 countdownAudio.Play();
             }
-            StartCoroutine(WaitAndDestroyAd(6.0f)); // Wait for 6 seconds and then destroy the last ad
+            adRemovalCoroutine = StartCoroutine(WaitAndDestroyAd(8.5f)); // Wait for 6 seconds and then destroy the last ad
         }
     }
 
     private IEnumerator WaitAndDestroyAd(float waitTime)
     {
-        yield return new WaitForSeconds(waitTime);
+        float startTime = Time.time;
+
+        while (Time.time - startTime < waitTime)
+        {
+            if (!isRemovingAd)
+            {
+                yield break; // Stop the coroutine if ad removal is canceled
+            }
+            yield return null; // Wait for the next frame
+        }
 
         if (PopUps.Count > 0)
         {
@@ -99,6 +115,7 @@ public class Monitor : MonoBehaviour
         }
 
         isRemovingAd = false;
+        adRemovalCoroutine = null; // Reset the coroutine reference
     }
 
 
